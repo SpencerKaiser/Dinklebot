@@ -85,7 +85,7 @@ module.exports = function (robot) {
         msg.send("OOOH FUCK YEA BUD");
     });
 
-    robot.respond(/.*Who'*s the worst\?*/i, function (msg) {
+    robot.respond(/.*Who'?s the worst.*/i, function (msg) {
         msg.reply("Slackbot, of course.");
     });
     //Who's the worst? Slackbot of course!
