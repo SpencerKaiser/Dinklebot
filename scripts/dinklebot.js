@@ -78,14 +78,14 @@ module.exports = function (robot) {
     });
 
     robot.hear(/wat/i, function (msg) {
-        msg.reply("Jigga WAT? This'll be a random img in the future");
+        msg.send("Jigga WAT? This'll be a random img in the future");
     });
 
     robot.hear(/just out for a rip are ya bud\?/i, function (msg) {
         msg.send("OOOH FUCK YEA BUD");
     });
 
-    robot.respond(/.*Who'?s the worst.*/i, function (msg) {
+    robot.respond(/.*Who[']?s the worst.*/i, function (msg) {
         msg.reply("Slackbot, of course.");
     });
     //Who's the worst? Slackbot of course!
