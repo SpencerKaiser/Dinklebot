@@ -5,9 +5,9 @@ module.exports = function (robot) {
     robot.hear(/.*score.*/i, function (msg) {
         //Match any sentence containg score or scores
         var scoreString = "Scoring still in development";
-        for (var item in scores) {
-            scoreString += item;
-        }
+//        for (var item in scores) {
+//            scoreString += item;
+//        }
 
         msg.send(scoreString);
     });
