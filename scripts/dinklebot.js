@@ -54,4 +54,7 @@ module.exports = function (robot) {
         msg.reply("Jigga WAT? This'll be a random img in the future");
     });
     
+    robot.respond(/just out for a rip are ya bud\?/i, function (msg) {
+        msg.reply("OOOH FUCK YEA BUD");
+    });
 };
