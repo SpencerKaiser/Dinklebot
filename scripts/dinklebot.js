@@ -42,7 +42,7 @@ module.exports = function (robot) {
     // *************** GENERAL ***************
     
     // GENERAL RESPONSE
-    robot.respond(/\?/i, function (msg) {
+    robot.respond(/.*\?/i, function (msg) {
         msg.reply("How may I be of assistance, Guardian?");
     });
   
@@ -50,7 +50,7 @@ module.exports = function (robot) {
         msg.reply("Jigga WAT? This'll be a random img in the future");
     });
     
-    robot.respond(/just out for a rip are ya bud\?/i, function (msg) {
+    robot.hear(/just out for a rip are ya bud\?/i, function (msg) {
         msg.send("OOOH FUCK YEA BUD");
     });
 };
