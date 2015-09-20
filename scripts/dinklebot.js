@@ -1,9 +1,5 @@
-/*global module,robot*/
-
-var scores = {};
-
 module.exports = function (robot) {
-    
+    var scores = {};    
     // *************** SCORING ***************
     // SEND SCORING INFO
     robot.hear(/.*score.*/i, function (msg) {
