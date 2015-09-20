@@ -9,7 +9,7 @@ module.exports = function (robot) {
             scoreString += item;
         }
 
-        msg.reply(scoreString);
+        msg.send(scoreString);
     });
 
     // ITEM++
@@ -21,7 +21,7 @@ module.exports = function (robot) {
             scores.item = {};
             scores.item.score = 1;
         }
-        msg.reply(item + " has " + scores.item.score + " points.");
+        msg.send(item + " has " + scores.item.score + " points.");
     });
     
     // ITEM--
@@ -33,7 +33,7 @@ module.exports = function (robot) {
             scores.item = {};
             scores.item.score = -1;
         }
-        msg.reply(item + " has " + scores.item.score + " points.");
+        msg.send(item + " has " + scores.item.score + " points.");
     });
     
     
@@ -51,6 +51,6 @@ module.exports = function (robot) {
     });
     
     robot.respond(/just out for a rip are ya bud\?/i, function (msg) {
-        msg.reply("OOOH FUCK YEA BUD");
+        msg.send("OOOH FUCK YEA BUD");
     });
 };
