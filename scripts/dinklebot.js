@@ -85,8 +85,12 @@ module.exports = function (robot) {
         msg.send("OOOH FUCK YEA BUD");
     });
     
+    robot.hear(/.*o+h fuck yea bud.*/i, function (msg) {
+        msg.send("BRB, out for a rip...");
+    });
+    
     robot.hear(/oh shit\!/i, function (msg) {
-        msg.send("We've woken the hive!");
+        msg.send("We've woken the Hive!");
     });
 
     robot.respond(/.*Who.?s the worst.*/i, function (msg) {
