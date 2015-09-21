@@ -84,9 +84,12 @@ module.exports = function (robot) {
     robot.hear(/just out for a rip are ya bud\?/i, function (msg) {
         msg.send("OOOH FUCK YEA BUD");
     });
+    
+    robot.hear(/oh shit\!/i, function (msg) {
+        msg.send("We've woken the hive!");
+    });
 
     robot.respond(/.*Who.?s the worst.*/i, function (msg) {
         msg.reply("Slackbot, of course.");
     });
-    //Who's the worst? Slackbot of course!
 };
