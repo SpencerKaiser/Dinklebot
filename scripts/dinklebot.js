@@ -77,9 +77,9 @@ module.exports = function (robot) {
         msg.send("How may I be of assistance, Guardian?");
     });
 
-    robot.hear(/wat/i, function (msg) {
-        msg.send("Jigga WAT? This'll be a random img in the future");
-    });
+//    robot.hear(/wat/i, function (msg) {
+//        msg.send("Jigga WAT? This'll be a random img in the future");
+//    });
 
     robot.hear(/just out for a rip are ya bud\?/i, function (msg) {
         msg.send("OOOH FUCK YEA BUD");
