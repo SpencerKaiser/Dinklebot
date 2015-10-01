@@ -9,28 +9,54 @@ module.exports = function (robot) {
     robot.hear(/.*score.*/i, function (msg) {
         //Match any sentence containg score or scores
         var scoreString = "\n";
-        var sortedScores = [];
+        var sortedPosScores = [];
+        var sortedNegScores = [];
         //Iterate through object
         //Test if each items score has an array at that index, if not create one
         //Push the score string into that array
 
         getScores();
+
+        //Iterate through items in scores object and save score string for each item
         for (var item in scores) {
-            if (scores[item].score >= 0 && !sortedScores[scores[item].score]) {
-                sortedScores[scores[item].score] = {};
+            //Make sure score is positive
+            var score = scores[item].score;
+            if (score >= 0) {
+                if (!sortedPosScores[score]) {
+                    //If that score is the first one of that value, create an object at that index
+                    sortedPosScores[score] = [];
+                }
+
+                var itemString = item + ' has ' + scores[item].score + " points.\n";
+                sortedPosScores[scores[item].score].push(itemString);
+            } else if (score < 0) {
+                score = Math.abs(score);
+                if (!sortedNegScores[score]) {
+                    sortedNegScores[score] = [];
+                }
+                var itemString = item + ' has ' + scores[item].score + " points.\n";
+                sortedNegScores[score].push(itemString);
             }
-            var itemString = item + ' has ' + scores[item].score + " points.\n";
-            sortedScores[scores[item].score] = [];
-            sortedScores[scores[item].score].push(itemString);
         }
 
-        for (var i = sortedScores.length - 1; i >= 0; i--) {
-            if (sortedScores[i]) {
-                for (var j = 0; j < sortedScores[i].length; j++) {
-                    scoreString += sortedScores[i][j];
+        //Iterate through all positive values and add string to final result
+        for (var i = sortedPosScores.length - 1; i >= 0; i--) {
+            if (sortedPosScores[i]) {
+                for (var j = 0; j < sortedPosScores[i].length; j++) {
+                    scoreString += sortedPosScores[i][j];
                 }
             }
         }
+
+        //Iterate through all negative values and add string to final result
+        for (var i = 0; i < sortedPosScores.length; i++) {
+            if (sortedNegScores[i]) {
+                for (var j = 0; j < sortedNegScores[i].length; j++) {
+                    scoreString += sortedNegScores[i][j];
+                }
+            }
+        }
+
         msg.send(scoreString);
     });
 
@@ -82,9 +108,9 @@ module.exports = function (robot) {
         msg.send("How may I be of assistance, Guardian?");
     });
 
-//    robot.hear(/wat/i, function (msg) {
-//        msg.send("Jigga WAT? This'll be a random img in the future");
-//    });
+    //    robot.hear(/wat/i, function (msg) {
+    //        msg.send("Jigga WAT? This'll be a random img in the future");
+    //    });
 
     robot.hear(/just out for a rip are ya bud\?/i, function (msg) {
         msg.send("OOOH FUCK YEA BUD");
@@ -106,16 +132,16 @@ module.exports = function (robot) {
         var quotes = ['It\'s in the walls!', 'Got \' em.', 'We\'ve woken the Hive!', 'I thought YOU had the hard job.', 'Well, at least he\'s chained up.', 'This path should lead us straight to the grave....... The World\'s Grave. Not ours.'];
         msg.send(msg.random(quotes));
     });
-    
-    
-    
-    
-    
-    getScores = function(){
+
+
+
+
+
+    getScores = function () {
         scores = robot.brain.get('scores');
     };
-    
-    saveScores = function(){
+
+    saveScores = function () {
         robot.brain.set('scores', scores);
     };
 };
