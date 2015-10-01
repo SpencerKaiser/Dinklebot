@@ -14,6 +14,7 @@ module.exports = function (robot) {
         //Test if each items score has an array at that index, if not create one
         //Push the score string into that array
 
+        getScores();
         for (var item in scores) {
             if (scores[item].score >= 0 && !sortedScores[scores[item].score]) {
                 sortedScores[scores[item].score] = {};
@@ -43,6 +44,7 @@ module.exports = function (robot) {
         scores[item].score += 1;
         last = item;
         msg.send(item + " has " + scores[item].score + " points.");
+        saveScores();
     });
 
     // ITEM--
@@ -56,17 +58,20 @@ module.exports = function (robot) {
         scores[item].score -= 1;
         last = item;
         msg.send(item + " has " + scores[item].score + " points.");
+        saveScores();
     });
 
 
     robot.hear(/^\+\+/i, function (msg) {
         scores[last].score += 1;
         msg.send(last + " has " + scores[last].score + " points.");
+        saveScores();
     });
 
     robot.hear(/^\-\-/i, function (msg) {
         scores[last].score -= 1;
         msg.send(last + " has " + scores[last].score + " points.");
+        saveScores();
     });
 
 
@@ -101,4 +106,16 @@ module.exports = function (robot) {
         var quotes = ['It\'s in the walls!', 'Got \' em.', 'We\'ve woken the Hive!', 'I thought YOU had the hard job.', 'Well, at least he\'s chained up.', 'This path should lead us straight to the grave....... The World\'s Grave. Not ours.'];
         msg.send(msg.random(quotes));
     });
+    
+    
+    
+    
+    
+    getScores = function(){
+        scores = robot.brain.get('scores');
+    };
+    
+    saveScores = function(){
+        robot.brain.set('scores', scores);
+    };
 };
